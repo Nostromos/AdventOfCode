@@ -1,13 +1,9 @@
 import loadInput from "@/utils";
 
 const PATH = "2017/Days/2/Input.txt";
-const input = loadInput(PATH);
+const input = parseInput(loadInput(PATH));
 
-/**
- * For each row, find the difference between the largest and smallest elements then sum that difference for all the rows and return.
- */
-
-function parseInput(input: string): number[][] {
+export function parseInput(input: string): number[][] {
   return input
     .trim()
     .split("\n")
@@ -19,16 +15,13 @@ function parseInput(input: string): number[][] {
     );
 }
 
-export function GetChecksum(input: string): number {
+export function GetChecksum(values: number[][]): number {
   let checksum = 0;
-
-  const values = parseInput(input);
 
   for (let line of values) {
     let min = Infinity;
     let max = 0;
-    console.log(line);
-    console.log("[BEFORE] Max:", max, " / Min:", min, " / Sum:", checksum);
+
     line.forEach(number => {
       if (number > max) {
         max = number;
@@ -39,17 +32,36 @@ export function GetChecksum(input: string): number {
       }
     })
     checksum += (max - min);
-    console.log("[AFTER] Max:", max, " / Min:", min, " / Sum:", checksum);
   }
 
   return checksum;
 }
 
-export function SumEvenlyDivisible(input: string): number {
-  const values = parseInput(input);
+export function SumEvenlyDivisible(values: number[][]): number {
   let sum = 0;
 
-  
+  for (let line of values) {
+    line.sort((a, b) => a - b);
+  }
+
+  for (let line of values) {
+    let modulus = null;
+
+    let p1 = 0, p2 = line.length - 1;
+    while (modulus == null) {
+      if (line[p2] % line[p1] == 0) {
+        modulus = line[p2] / line[p1]
+      } else {
+        if (p1 == p2 - 1) {
+          p1 = 0;
+          p2--;
+        } else {
+          p1++;
+        }
+      }
+    }
+    sum += modulus;
+  }
 
   return sum;
 }
