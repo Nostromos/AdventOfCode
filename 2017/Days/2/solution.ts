@@ -45,4 +45,11 @@ export function GetChecksum(input: string): number {
   return checksum;
 }
 
-console.log(GetChecksum(input));
+export function SumEvenlyDivisible(input: string): number {
+  const values = parseInput(input);
+  let sum = 0;
+
+  
+
+  return sum;
+}
