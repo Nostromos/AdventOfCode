@@ -1,13 +1,13 @@
-import loadInput from "../../../utils";
+import loadInput from "@/utils";
 
-
-const input = loadInput();
+const PATH = "2017/Days/1/Input.txt";
+const input = loadInput(PATH);
 
 /**
  * Find the sum of all digits that match the next digit in the list
  */
 
-function InverseCaptcha2Pointer(input: string): number {
+export default function InverseCaptcha2Pointer(input: string): number {
   if (input.length <= 1) return 0;
 
   let sum = 0; // running sum
@@ -31,4 +31,6 @@ function InverseCaptcha2Pointer(input: string): number {
   return sum;
 }
 
-console.log(InverseCaptcha2Pointer(input));
+
+
+console.log(InverseCaptcha2Pointer(input));``
