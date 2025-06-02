@@ -1,38 +1,31 @@
 import loadInput from "@/utils";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const PATH = "2017/Days/2/Input.txt";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const PATH = __dirname + "/Input.txt"; // TODO: Move this to loadInput in @/utils
 const input = parseInput(loadInput(PATH));
 
 export function parseInput(input: string): number[][] {
   return input
     .trim()
     .split("\n")
-    .map(line =>
-      line
+    .map(row =>
+      row
         .trim()
         .split(/\s+/)
         .map(Number)
     );
 }
 
-export function GetChecksum(values: number[][]): number {
+export function getChecksum(values: number[][]): number {
   let checksum = 0;
 
-  for (let line of values) {
-    let min = Infinity;
-    let max = 0;
-
-    line.forEach(number => {
-      if (number > max) {
-        max = number;
-      }
-
-      if (number < min) {
-        min = number;
-      }
-    })
-    checksum += (max - min);
-  }
+  values.forEach((row) => {
+    const diff = Math.max(...row) - Math.min(...row);
+    checksum += diff;
+  });
 
   return checksum;
 }
@@ -65,3 +58,25 @@ export function SumEvenlyDivisible(values: number[][]): number {
 
   return sum;
 }
+
+/**
+ * 
+ * 1640	590	93	958	73	1263	1405	1363	737	712	1501	390	68	1554	959	79
+ * 
+ */
+
+// function enumerateDivisors() {
+
+// }
+
+// function findDivisiblePair(nums: number[]) {
+//   const rowSet = new Set(nums);
+
+//   rowSet.forEach((num) => {
+//     // enumerateDivisors
+//   })
+// }
+
+// export function sumEvenlyDivisible(values: number[][]) {
+
+// }
