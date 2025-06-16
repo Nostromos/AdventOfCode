@@ -27,19 +27,31 @@ export function day3Part1(input: number): number {
   console.log("\x1b[31mCorners Info:\x1b[0m", corners);
 
   // Find closest corner, find axis, find amplitude, then manipulate closest corner coordinates to get the point, which gives us the number of steps
-  let nearCorner = corners.findIndex((element) => element.value > input) - 1 // Search the corners till we find one that is over, then we go to the one before it
+  let nearCorner = corners[corners.findIndex((element) => element.value > input) - 1] // Search the corners till we find one that is over, then we go to the one before it
 
   // Find the diff of the corner value and our value
   console.log("Input:", input)
-  console.log("Nearest corner val:", corners[nearCorner].value)
-  console.log("Nearest corner loc:", corners[nearCorner].location)
+  console.log("Nearest corner val:", nearCorner.value)
+  console.log("Nearest corner loc:", nearCorner.location)
+  console.log("Nearest corner Direction:", nearCorner.direction)
 
-  console.log(nearCorner)
-
-  const diff = input - corners[nearCorner].value;
+  let diff = input - nearCorner.value;
   console.log(diff);
 
-  return 0;
+  let currentCoords = {
+    x: nearCorner.x,
+    y: nearCorner.y,
+    direction: nearCorner.direction
+  }
+
+  while (diff > 0) {
+    let nextCoords = next(currentCoords.x, currentCoords.y, currentCoords.direction)
+    currentCoords.x = nextCoords[0]
+    currentCoords.y = nextCoords[1]
+    diff--;
+  }
+  console.log(currentCoords);
+  return Math.abs(currentCoords.x) + Math.abs(currentCoords.y);
 }
 
 type Coordinate = [x: number, y: number];
@@ -58,15 +70,47 @@ function next(x: number, y: number, direction: string) {
 }
 
 function getCorners(x: number, y: number, length: number, startNum: number) {
-  console.log("Start:", `[${x}, ${y}]`)
-  console.log("Length:", length)
-  console.log("Start Value:", startNum)
+  console.log("Start:", `[${x}, ${y}]`);
+  console.log("Length:", length);
+  console.log("Start Value:", startNum);
+
+  const topRight = {
+    x: x,
+    y: y + length - 1,
+    value: startNum + (length - 2),
+    direction: "left",
+    location: "Top Right"
+  }
+
+  const topLeft = {
+    x: x - (length - 1),
+    y: y,
+    value: topRight.value + (length - 1),
+    direction: "down",
+    location: "Top Left"
+  }
+
+  const bottomLeft = {
+    x: x - length - 1,
+    y: y - length - 1,
+    value: topLeft.value + length - 1,
+    direction: "right",
+    location: "Bottom Left"
+  }
+
+  const bottomRight = {
+    x: x,
+    y: y - 1,
+    value: bottomLeft.value + length - 1,
+    direction: "up",
+    location: "Bottom Right"
+  }
 
   return [
-    { x: x, y: y + length - 1, value: startNum + (length - 2), location: "right" },
-    { x: x - length - 1, y: y, value: startNum + (length - 2) + (length - 1), location: "top" },
-    { x: x - length - 1, y: y - length - 1, value: startNum + (length - 2) + length - 1 + length - 1, location: "left" },
-    { x: x, y: y - 1, value: startNum + (length - 2) + length - 1 + length - 1 + length - 1 , location: "bottom" },
+    topRight,
+    topLeft,
+    bottomLeft,
+    bottomRight
   ]
 }
 
@@ -104,8 +148,8 @@ function getGridQualities(num: number): Grid {
     grid.numLayers = (grid.length + 1) / 2;
     grid.startNum = grid.endNum + 1;
     grid.endNum = grid.startNum + grid.layerPoints;
-    grid.entryX = grid.numLayers - 1;
-    grid.entryY = -(grid.entryX - 1)
+    grid.entryX = grid.numLayers;
+    grid.entryY = -grid.numLayers + 1
   }
 
   return grid;
