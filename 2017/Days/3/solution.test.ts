@@ -1,12 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
-import { day3Part1 } from './solution';
+import { day3Part1, day3Part2, getSquareValue } from './solution';
 
-// Data from square 1 is carried 0 steps, since it's at the access port.
-// Data from square 12 is carried 3 steps, such as: down, left, left.
-// Data from square 23 is carried only 2 steps: up twice.
-// Data from square 1024 must be carried 31 steps.
-
-describe('Day 3 - Part 1 - Testing the examples...', () => {
+describe('Day 3 - Part 1 - Example Tests', () => {
   it('Data from square 1 is carried 0 steps', () => {
     const input = 1;
     const result = day3Part1(input);
@@ -37,11 +32,60 @@ describe('Day 3 - Part 1 - Testing the examples...', () => {
 
 });
 
-xdescribe('Day 3 - Part 2 - Example Tests', () => {
-  it('', () => {
-    const input = 0;
-    let result;
+describe('Day 3 - Part 2 - Example Tests', () => {
+  it('square 1 returns 1', () => {
+    const input = 1;
+    let result = getSquareValue(input);
 
-    expect(result).toEqual(0);
+    expect(result).toEqual(1);
+  });
+
+  it('square 2 returns 1', () => {
+    const input = 2;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(1);
+  });
+
+  it('square 3 returns 2', () => {
+    const input = 3;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(2);
+  });
+
+  it('square 4 returns 4', () => {
+    const input = 4;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(4);
+  });
+
+  it('square 5 returns 5', () => {
+    const input = 5;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(5);
+  });
+
+  it('square 8 returns 23', () => {
+    const input = 8;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(23);
+  });
+
+  it('square 12 returns 57', () => {
+    const input = 12;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(57);
+  });
+
+  it('square 13 returns 59', () => {
+    const input = 13;
+    let result = getSquareValue(input);
+
+    expect(result).toEqual(59);
   });
 })
