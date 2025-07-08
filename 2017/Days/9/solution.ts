@@ -41,4 +41,7 @@ export function Day9(stream: string) {
   };
 }
 
+const start = performance.now()
 console.log(Day9(raw))
+const end = performance.now()
+console.log(`Time taken:`, end - start, "ms")
