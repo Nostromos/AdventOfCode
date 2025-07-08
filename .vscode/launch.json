@@ -1,0 +1,87 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug TypeScript (Best)",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${file}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register/transpile-only"
+      ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json",
+        "TS_NODE_TRANSPILE_ONLY": "true",
+        "TS_NODE_FILES": "true"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug Current File (Direct)",
+      "program": "${file}",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "runtimeExecutable": "tsx",
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug Specific Day",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/${input:year}/Days/${input:day}/solution.ts",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register/transpile-only"
+      ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json",
+        "TS_NODE_TRANSPILE_ONLY": "true",
+        "TS_NODE_FILES": "true"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "day",
+      "type": "promptString",
+      "description": "Which day to debug? (e.g., 10)"
+    },
+    {
+      "id": "year",
+      "type": "promptString",
+      "description": "Which year? (e.g., 2017)",
+      "default": "2017"
+    }
+  ]
+}
