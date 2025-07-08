@@ -2,13 +2,12 @@ import loadInput from "@/utils";
 
 const PATH = "2017/Days/9/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);
-const input = raw.split("")
 
 // -----------------------------------------
 // --- Day 9: Stream Processing ---
 // -----------------------------------------
 
-export function Day9(stream: string[]) {
+export function Day9(stream: string) {
   let score = 0;
   let garbage = false;
   let depth = 0;
@@ -42,4 +41,4 @@ export function Day9(stream: string[]) {
   };
 }
 
-console.log(Day9(input))
+console.log(Day9(raw))
