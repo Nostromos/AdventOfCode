@@ -2,45 +2,26 @@ import loadInput from "@/utils";
 
 const PATH = "2017/Days/9/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);
+const input = raw.split("")
 
 // -----------------------------------------
 // --- Day 9: Stream Processing ---
 // -----------------------------------------
 
-function hasChars(c: string) {
-  const ALLCHARS = ['{', '}', '<', '>', '!'];
-
-  return ALLCHARS.includes(c);
-}
-
-const CHARS = {
-  groupOpen: '{',
-  groupClose: '}',
-  garbageOpen: '<',
-  garbageClose: '>',
-  cancel: '!'
-}
-
-export function Day9(raw: string) {
-  const stream = raw.split("");
-  const scores: number[] = [];
-  const stack: string[] = [];
+export function Day9(stream: string[]) {
+  let score = 0;
   let garbage = false;
-  let peek = null;
   let depth = 0;
   let garbageCount = 0;
 
   for (let i = 0; i < stream.length; i++) {
     let cur = stream[i];
-    if (garbage == false) {
+    if (!garbage) {
       if (cur == '{') {
         depth++;
-        stack.push(cur);
-        peek = cur;
-      } else if (cur == '}' && peek == '{') {
-        scores.push(depth);
+      } else if (cur == '}') {
+        score += depth
         depth--;
-        stack.pop();
       } else if (cur == '<') {
         garbage = true;
       }
@@ -56,9 +37,9 @@ export function Day9(raw: string) {
   }
 
   return {
-    score: scores.reduce((a, b) => a + b, 0),
+    score: score,
     garbage: garbageCount
   };
 }
 
-console.log(Day9(raw))
+console.log(Day9(input))
