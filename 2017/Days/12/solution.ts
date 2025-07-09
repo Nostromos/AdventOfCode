@@ -24,7 +24,7 @@ export function Day12Part1(rawInput: string) {
   let groupCount = 0;
   let queue = [0];
   while (queue.length > 0) {
-    let p = queue.shift()!
+    let p = queue.pop()!
     let cur = map.get(p);
     map.delete(p)
     if (cur) {
@@ -53,7 +53,7 @@ export function Day12Part2(map: any) {
     let queue = [start]
 
     while (queue.length > 0) {
-      let p = queue.shift();
+      let p = queue.pop();
       let c = map.get(p!);
       if (c) {
         map.delete(p!)
