@@ -1,7 +1,7 @@
 const [year, day] = process.argv.slice(2);
 
 if (!year || !day) {
-  console.error('Usage: npm run run -- <year> <day>');   // e.g.  npm run run -- 2017 3
+  console.error('Usage: npm run solve -- <year> <day>');   // e.g.  npm run solve -- 2017 3
   process.exit(1);
 }
 
