@@ -1,10 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-I'll help you create a prompt for your CLAUDE.md file that encourages discussion and problem-solving without jumping straight to solutions. Here's a prompt you can add:
-markdown# Claude Instructions for Advent of Code
-
 When helping with Advent of Code problems, please follow these guidelines:
 
 ## General Approach
