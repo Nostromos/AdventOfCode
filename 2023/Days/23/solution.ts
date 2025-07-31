@@ -78,8 +78,8 @@ class HikingMap {
     let nodes = this.findStartAndEnd(this.hikingMap);
     this.start = new Node(nodes.start);
     this.end = new Node(nodes.end);
-    
-    // Add start and end to the nodes map
+
+    // Add start and end to map
     this.nodes.set(this.start.getStrCoordinates(), this.start);
     this.nodes.set(this.end.getStrCoordinates(), this.end);
   }
@@ -89,16 +89,11 @@ class HikingMap {
 
     // start
     start = { x: map[0].findIndex((spot, i) => spot === "."), y: 0 }
-    
-    // end - the problem description says it's in the bottom row
+
+    // end
     let lastRow = map[map.length - 1];
     let endX = lastRow.findIndex((spot) => spot === ".");
-    if (endX === -1) {
-      // If no "." found, look for the last non-wall position
-      endX = lastRow.length - 2; // Usually the second to last position
-    }
     end = { x: endX, y: map.length - 1 }
-
 
     return { start, end };
   }
@@ -193,17 +188,17 @@ class HikingMap {
     let current = path;
     let last = node.coordinates;
     let steps = 1;
-    
+
 
     while (true) {
-      // check if its the end FIRST
+      // check if its the end
       if (current.x === this.end.coordinates.x && current.y === this.end.coordinates.y) {
         node.addPath(this.end, steps);
-        // Don't add reverse path from end node - it's a terminal node
+        // Don't add reverse path from end
         this.isRouteToEnd(node);
         return;
       }
-      
+
       let neighbors = this.getNeighbors(current, last);
 
       // check dead end
@@ -211,14 +206,14 @@ class HikingMap {
         return;
       }
 
-      // check each neighbor in turn
+      // check each neighbor
       if (neighbors.length > 1) {
         if (neighbors.length > 2) {
           console.log(red + "Multiple neighbors:", reset, neighbors);
         }
         let coordKey = `${current.x},${current.y}`;
         let junctionNode = this.nodes.get(coordKey);
-        
+
         let isNewJunction = false;
         if (!junctionNode) {
           // Create new junction node only if it doesn't exist
@@ -226,10 +221,10 @@ class HikingMap {
           this.nodes.set(coordKey, junctionNode);
           isNewJunction = true;
         }
-        
-        // Always add the path from current node to junction
+
+        // Always add path from current to junction
         node.addPath(junctionNode, steps);
-        
+
         // Only explore from new junctions
         if (isNewJunction) {
           for (let neighbor of neighbors) {
@@ -273,7 +268,7 @@ class HikingMap {
     for (let neighbor of startNeighbors) {
       this.explorePath(this.start, neighbor);
     }
-    
+
     console.log("Graph built:");
     console.log("Total nodes:", this.nodes.size);
     console.log("Start node paths:", this.start.paths.length);
