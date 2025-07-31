@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { Day23Part1 } from './solution';
+import { Day23Part1 } from './solution-draft';
 
 describe('Day 23 - Part 1 - Example Tests', () => {
   it('Longest steps is 94', () => {
