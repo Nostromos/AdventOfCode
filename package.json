@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "solve": "tsx ./utils/run-solution.ts",
-    "jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "new-solution": "tsx utils/new-solution.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
