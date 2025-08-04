@@ -29,7 +29,7 @@ export type Direction = [number, number];
  * const grid = createGrid(10, 10, 0);
  */
 export function createGrid<T>(rows: number, cols: number, defaultValue: T): Grid<T> {
-  throw new Error("Not implemented");
+  return new Array(rows).map(() => Array(cols).fill(defaultValue))
 }
 
 /**
@@ -42,8 +42,14 @@ export function createGrid<T>(rows: number, cols: number, defaultValue: T): Grid
  * // Create a grid from a raw string
  * const grid = createGrid(rawInput);
  */
-export function createGridFrom<T>(input: T): Grid<T> {
-  throw new Error("Not implemented");
+export function createGridFrom<T>(input: string, rowSeparator: string, colSeparator: string, transform?: (cell: string) => T): Grid<T> {
+  const rows = input.split(rowSeparator);
+
+  if (transform) {
+    return rows.map(row => row.split(colSeparator).map(cell => transform(cell)))
+  } else {
+    return rows.map(row => row.split(colSeparator)) as Grid<T>
+  }
 }
 
 /**
@@ -60,7 +66,23 @@ export function createGridFrom<T>(input: T): Grid<T> {
  * // Returns: [[5, 6], [6, 5], [5, 4], [4, 5]] (if all in bounds)
  */
 export function getNeighbors4<T>(grid: Grid<T>, row: number, col: number): Point[] {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Can't get neighbors! Grid is empty or undefined.")
+  }
+
+  const height = grid.length;
+  const width = grid[0].length;
+  const neighbors: Point[] = [];
+
+  for (let d of DIRECTIONS_4) {
+    let [r, c] = [row + d[0], col + d[1]]
+
+    if (r >= 0 && r < height && c >= 0 && c < width) {
+      neighbors.push([r, c] as Point);
+    }
+  }
+
+  return neighbors;
 }
 
 /**
@@ -76,7 +98,23 @@ export function getNeighbors4<T>(grid: Grid<T>, row: number, col: number): Point
  * const neighbors = getNeighbors8(grid, 5, 5);
  */
 export function getNeighbors8<T>(grid: Grid<T>, row: number, col: number): Point[] {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Can't get neighbors! Grid is empty or undefined.")
+  }
+
+  const height = grid.length;
+  const width = grid[0].length;
+  const neighbors: Point[] = [];
+
+  for (let d of DIRECTIONS_8) {
+    let [r, c] = [row + d[0], col + d[1]]
+
+    if (r >= 0 && r < height && c >= 0 && c < width) {
+      neighbors.push([r, c] as Point);
+    }
+  }
+
+  return neighbors;
 }
 
 /**
@@ -94,7 +132,11 @@ export function getNeighbors8<T>(grid: Grid<T>, row: number, col: number): Point
  * }
  */
 export function inBounds<T>(grid: Grid<T>, row: number, col: number): boolean {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot find bounds - Grid is empty or undefined.")
+  }
+
+  return row >= 0 && col >= 0 && row <= grid.length && col <= grid[0].length;
 }
 
 /**
@@ -108,7 +150,21 @@ export function inBounds<T>(grid: Grid<T>, row: number, col: number): boolean {
  * const rotated = rotateClockwise(grid);
  */
 export function rotateClockwise<T>(grid: Grid<T>): Grid<T> {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot rotate grid 90 clockwise - Grid is empty or undefined.")
+  }
+
+  const numRows = grid.length;
+  const numCols = grid[0].length;
+
+  const rotatedGrid = Array.from({ length: numCols }, () => Array(numRows).fill(0));
+
+  for (let i = 0; i < numRows; i++) {
+    for (let j = 0; j < numCols; j++) {
+      rotatedGrid[j][numRows - 1 - i] = grid[i][j];
+    }
+  }
+  return rotatedGrid;
 }
 
 /**
@@ -118,7 +174,21 @@ export function rotateClockwise<T>(grid: Grid<T>): Grid<T> {
  * @returns New rotated grid
  */
 export function rotateCounterClockwise<T>(grid: Grid<T>): Grid<T> {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot rotate grid 90 counterclockwise - Grid is empty or undefined.")
+  }
+
+  const numRows = grid.length;
+  const numCols = grid[0].length;
+
+  const rotatedGrid = Array.from({ length: numCols }, () => Array(numRows).fill(0));
+
+  for (let i = 0; i < numRows; i++) {
+    for (let j = 0; j < numCols; j++) {
+      rotatedGrid[numCols - 1 - j][i] = grid[i][j];
+    }
+  }
+  return rotatedGrid;
 }
 
 /**
@@ -132,7 +202,11 @@ export function rotateCounterClockwise<T>(grid: Grid<T>): Grid<T> {
  * const flipped = flipHorizontal(grid);
  */
 export function flipHorizontal<T>(grid: Grid<T>): Grid<T> {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot flip grid horizontally - Grid is empty or undefined.")
+  }
+
+  return grid.map(line => [...line].reverse())
 }
 
 /**
@@ -142,7 +216,11 @@ export function flipHorizontal<T>(grid: Grid<T>): Grid<T> {
  * @returns New flipped grid
  */
 export function flipVertical<T>(grid: Grid<T>): Grid<T> {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot flip grid vertically - Grid is empty or undefined.")
+  }
+
+  return [...grid].reverse();
 }
 
 /**
@@ -186,7 +264,7 @@ export function findInGrid<T>(grid: Grid<T>, value: T): Point[] {
  * const copy = cloneGrid(original);
  */
 export function cloneGrid<T>(grid: Grid<T>): Grid<T> {
-  throw new Error("Not implemented");
+  return structuredClone(grid);
 }
 
 /**
@@ -252,7 +330,7 @@ export function floodFill<T>(grid: Grid<T>, start: Point, fillValue: T, targetVa
  * const dist = manhattanDistance([0, 0], [3, 4]); // 7
  */
 export function manhattanDistance(p1: Point, p2: Point): number {
-  throw new Error("Not implemented");
+  return Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
 }
 
 /**
@@ -266,5 +344,25 @@ export function manhattanDistance(p1: Point, p2: Point): number {
  * const border = getBorderPoints(grid);
  */
 export function getBorderPoints<T>(grid: Grid<T>): Point[] {
-  throw new Error("Not implemented");
+  let borderPoints: Point[] = [];
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  // Top and bottom rows
+  for (let j = 0; j < cols; j++) {
+    borderPoints.push([0, j]);
+    if (rows > 1) {
+      borderPoints.push([rows - 1, j]);
+    }
+  }
+
+  // Left and right columns (excluding corners in frist and last)
+  for (let i = 1; i < rows - 1; i++) {
+    borderPoints.push([i, 0]);
+    if (cols > 1) {
+      borderPoints.push([i, cols - 1]);
+    }
+  }
+
+  return borderPoints;
 }
