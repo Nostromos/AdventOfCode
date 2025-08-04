@@ -8,8 +8,10 @@
 // Common direction vectors
 export const DIRECTIONS_4 = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // Right, Down, Left, Up
 export const DIRECTIONS_8 = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
-export const DIRECTION_NAMES = ['R', 'D', 'L', 'U', 'DR', 'DL', 'UR', 'UL'];
-export const COMPASS_NAMES = ['N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW']
+export const DIRECTION_NAMES_4 = ['U', 'D', 'L', 'R'];
+export const DIRECTION_NAMES_8 = ['R', 'D', 'L', 'U', 'DR', 'DL', 'UR', 'UL'];
+export const COMPASS_NAMES_4 = ['N', 'S', 'E', 'W'];
+export const COMPASS_NAMES_8 = ['N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW']
 
 // Type definitions
 export type Grid<T> = T[][];
@@ -29,7 +31,7 @@ export type Direction = [number, number];
  * const grid = createGrid(10, 10, 0);
  */
 export function createGrid<T>(rows: number, cols: number, defaultValue: T): Grid<T> {
-  return new Array(rows).map(() => Array(cols).fill(defaultValue))
+  return Array.from({ length: rows }, () => Array(cols).fill(defaultValue));
 }
 
 /**
@@ -136,7 +138,7 @@ export function inBounds<T>(grid: Grid<T>, row: number, col: number): boolean {
     throw new Error("Cannot find bounds - Grid is empty or undefined.")
   }
 
-  return row >= 0 && col >= 0 && row <= grid.length && col <= grid[0].length;
+  return row >= 0 && col >= 0 && row < grid.length && col < grid[0].length;
 }
 
 /**
@@ -233,9 +235,32 @@ export function flipVertical<T>(grid: Grid<T>): Grid<T> {
  * @example
  * // Print a numeric grid
  * console.log(printGrid(grid, (cell) => cell.toString().padStart(3)));
+ * 
+ * // Convert booleans to visual symbols
+ * console.log(printGrid(visited, (cell) => cell ? '█' : '·'));
+ * 
+ * // Show path with icons
+ * console.log(printGrid(maze, (cell) => {
+ *   switch(cell) {
+ *     case '#': return '█';
+ *     case '.': return ' ';
+ *     case 'S': return '◉';
+ *     case 'E': return '◎';
+ *     case '*': return '★';
+ *     default: return String(cell);
+ *   }
+ * }));
  */
 export function printGrid<T>(grid: Grid<T>, formatter?: (cell: T) => string): string {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot print an empty, undefined, or malformed grid")
+  }
+
+  return grid.map(row =>
+    row.map(cell =>
+      formatter ? formatter(cell) : String(cell)
+    ).join('')
+  ).join('\n');
 }
 
 /**
@@ -250,7 +275,19 @@ export function printGrid<T>(grid: Grid<T>, formatter?: (cell: T) => string): st
  * const positions = findInGrid(grid, 'X');
  */
 export function findInGrid<T>(grid: Grid<T>, value: T): Point[] {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot find value in an empty, undefined, or malformed grid")
+  }
+
+  const positions: Point[] = [];
+
+  grid.forEach((line, i) => line.forEach((char, j) => {
+    if (char === value) {
+      positions.push([i, j])
+    }
+  }))
+
+  return positions;
 }
 
 /**
@@ -280,7 +317,20 @@ export function cloneGrid<T>(grid: Grid<T>): Grid<T> {
  * const value = getAt(grid, [row, col], '#');
  */
 export function getAt<T>(grid: Grid<T>, point: Point, defaultValue: T): T {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot get a value from an empty, malformed, or undefined grid.")
+  }
+
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  let [r, c] = point;
+
+  if (r < 0 || r >= rows || c < 0 || c >= cols) {
+    return defaultValue;
+  } else {
+    return grid[r][c];
+  }
 }
 
 /**
@@ -298,7 +348,21 @@ export function getAt<T>(grid: Grid<T>, point: Point, defaultValue: T): T {
  * }
  */
 export function setAt<T>(grid: Grid<T>, point: Point, value: T): boolean {
-  throw new Error("Not implemented");
+  if (grid === null || grid === undefined || grid.length === 0 || grid[0].length === 0) {
+    throw new Error("Cannot set value at point. Grid empty, malformed, or undefined.")
+  }
+
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  let [r, c] = point;
+
+  if (r < 0 || r >= rows || c < 0 || c >= cols) {
+    return false;
+  } else {
+    grid[r][c] = value;
+    return true;
+  }
 }
 
 /**
@@ -315,7 +379,52 @@ export function setAt<T>(grid: Grid<T>, point: Point, value: T): boolean {
  * const filled = floodFill(grid, [5, 5], 'X', '.');
  */
 export function floodFill<T>(grid: Grid<T>, start: Point, fillValue: T, targetValue?: T): number {
-  throw new Error("Not implemented");
+  const [startRow, startCol] = start;
+
+  if (startRow < 0 || startRow >= grid.length || startCol < 0 || startCol >= grid[0].length) {
+    return 0;
+  }
+  const startValue = grid[startRow][startCol];
+  if (startValue === fillValue) {
+    return 0;
+  }
+
+  // figure out what we're trying to fill - if there's no target value, we just use start
+  const valueToReplace = targetValue !== undefined ? targetValue : startValue;
+
+  // If start !== the value we target, dont fill
+  if (startValue !== valueToReplace) {
+    return 0;
+  }
+
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  function fill(point: Point): number {
+    let [r, c] = point;
+
+    // Check bounds
+    if (r < 0 || r >= rows || c < 0 || c >= cols) {
+      return 0;
+    }
+
+    // Skip if not the value we're replacing or already filled
+    if (grid[r][c] !== valueToReplace || grid[r][c] === fillValue) {
+      return 0;
+    }
+
+    grid[r][c] = fillValue;
+    let count = 1;
+
+    count += fill([r + 1, c]); // Down
+    count += fill([r - 1, c]); // Up
+    count += fill([r, c + 1]); // Right
+    count += fill([r, c - 1]); // Left
+
+    return count;
+  }
+
+  return fill(start);
 }
 
 /**
