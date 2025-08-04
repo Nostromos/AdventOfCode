@@ -1,4 +1,4 @@
-import loadInput from "@/utils";
+import { loadInput } from "@/utils";
 
 const PATH = "2017/Days/9/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);

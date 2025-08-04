@@ -18,7 +18,13 @@
  * lines.forEach(line => processLine(line));
  */
 export function parseLines(input: string, keepEmpty: boolean = false): string[] {
-  throw new Error("Not implemented");
+  const lines = input.split('\n').map(line => line.trim());
+  
+  if (keepEmpty) {
+    return lines;
+  }
+  
+  return lines.filter(line => line.length > 0);
 }
 
 /**
@@ -33,11 +39,15 @@ export function parseLines(input: string, keepEmpty: boolean = false): string[] 
  * const char = grid[row][col];
  */
 export function parseGrid(input: string): string[][] {
-  throw new Error("Not implemented");
+  return input
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .map(line => line.split(''));
 }
 
 /**
- * Extract all numbers from a string (handles negative numbers)
+ * Extract all integers from a string (handles negative numbers)
  * 
  * @param input - String containing numbers
  * @returns Array of numbers found in the string
@@ -47,7 +57,8 @@ export function parseGrid(input: string): string[][] {
  * const numbers = parseNumbers(line); // [5, -3]
  */
 export function parseNumbers(input: string): number[] {
-  throw new Error("Not implemented");
+  const matches = input.match(/-?\d+/g);
+  return matches ? matches.map(Number) : [];
 }
 
 /**

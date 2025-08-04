@@ -1,4 +1,4 @@
-import loadInput from "@/utils";
+import { loadInput } from "@/utils";
 
 const PATH = "2017/Days/3/Input.txt"; // TODO: Move this to loadInput in @/utils
 const input = Number(loadInput(PATH));

@@ -8,7 +8,7 @@
 // Common direction vectors
 export const DIRECTIONS_4 = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // Right, Down, Left, Up
 export const DIRECTIONS_8 = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
-export const DIRECTION_NAMES_4 = ['U', 'D', 'L', 'R'];
+export const DIRECTION_NAMES_4 = ['R', 'D', 'L', 'U']; // Matches DIRECTIONS_4 order
 export const DIRECTION_NAMES_8 = ['R', 'D', 'L', 'U', 'DR', 'DL', 'UR', 'UL'];
 export const COMPASS_NAMES_4 = ['N', 'S', 'E', 'W'];
 export const COMPASS_NAMES_8 = ['N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW']
@@ -465,7 +465,7 @@ export function getBorderPoints<T>(grid: Grid<T>): Point[] {
     }
   }
 
-  // Left and right columns (excluding corners in frist and last)
+  // Left and right columns (excluding corners in first and last)
   for (let i = 1; i < rows - 1; i++) {
     borderPoints.push([i, 0]);
     if (cols > 1) {

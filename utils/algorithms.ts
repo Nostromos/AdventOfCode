@@ -36,7 +36,48 @@ export function bfs<T extends GraphNode>(
   parents: Map<T, T | null>;
   path: Map<T, Path<T>>;
 } {
-  throw new Error("Not implemented");
+  const distances = new Map<T, number>();
+  const parents = new Map<T, T | null>();
+  const path = new Map<T, Path<T>>();
+  const queue: T[] = [];
+  const visited = new Set<T>();
+  
+  // Initialize start node
+  queue.push(start);
+  visited.add(start);
+  distances.set(start, 0);
+  parents.set(start, null);
+  path.set(start, [start]);
+  
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    
+    // Early termination if we found the target
+    if (target && current === target) {
+      break;
+    }
+    
+    // Get neighbors of current node
+    const neighbors = graph.get(current);
+    if (!neighbors) continue;
+    
+    for (const neighbor of neighbors) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push(neighbor);
+        
+        // Update distance, parent, and path
+        const currentDistance = distances.get(current)!;
+        distances.set(neighbor, currentDistance + 1);
+        parents.set(neighbor, current);
+        
+        const currentPath = path.get(current)!;
+        path.set(neighbor, [...currentPath, neighbor]);
+      }
+    }
+  }
+  
+  return { distances, parents, path };
 }
 
 /**

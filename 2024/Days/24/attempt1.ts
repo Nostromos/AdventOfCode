@@ -1,4 +1,4 @@
-import loadInput from "@/utils";
+import { loadInput } from "@/utils";
 
 const PATH = "2024/Days/24/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);
@@ -150,7 +150,7 @@ function processInput(rawInput: string) {
   for (let circuit of rawLogicGates.split("\n")) {
     const [inputs, output] = circuit.split(" -> ");
     const [input1, operation, input2] = inputs.split(" ");
-    
+
     console.log("Circuit:", circuit);
     // Check if the gates exist: Create if not else retrieve
     let Input1, Input2, Output;
@@ -211,7 +211,16 @@ export function Day24Part1(rawInput: string) {
 }
 
 export function Day24Part2(rawInput: string) {
+  let [rawInitialState, rawGates] = rawInput.split("\n\n");
+  let initialState = rawInitialState.split("\n");
+  let gates = rawGates.split("\n");
 
+  let wires = new Map();
+  for (let line of initialState) {
+    const [wire, strValue] = line.split(": ");
+    const value = Number(strValue);
+    wires.set(wire, new)
+  }
 }
 
 const start = performance.now()

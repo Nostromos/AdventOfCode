@@ -1,4 +1,4 @@
-import loadInput from "@/utils";
+import { loadInput } from "@/utils";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
