@@ -27,10 +27,10 @@ const solutionTemplate = readFileSync(
 );
 
 const solutionContent = solutionTemplate
-  .replace(/X/g, day)
-  .replace('2017/Days/X', `${year}/Days/${day}`)
-  .replace(/DayXpart1/g, `Day${day}Part1`)
-  .replace(/DayXPart2/g, `Days${day}Part2`);
+  .replace('YEAR/Days/X', `${year}/Days/${day}`)
+  .replace(/DayXPart1/g, `Day${day}Part1`)
+  .replace(/DayXPart2/g, `Day${day}Part2`)
+  .replace(/X/g, day);
 
 writeFileSync(join(newSolution, 'solution.ts'), solutionContent);
 
