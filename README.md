@@ -1,4 +1,6 @@
-![Advent of Code Logo](https://repository-images.githubusercontent.com/112706767/160be980-3b1a-11eb-9dbe-439a40adfa99)
+<p align="center">
+  <img src="./public/Advent_Of_Code_Logo.png" alt="Advent of Code Logo" />
+</p>
 <h1 align="center"><i>Advent of Code</i></h1>
 
 <p align="center">
@@ -23,8 +25,6 @@ These are my [Advent of Code](https://adventofcode.com/) solutions for years 201
 In most cases, I optimized for solving the problem quickly, so some of these solutions are... messy. **But they (mostly) work!** 🎄
 
 I've added all problems I attempt, whether or not I completed them.
-
-## Progress
 
 | Year | Progress                                                                                     |
 | ---- | -------------------------------------------------------------------------------------------- |
