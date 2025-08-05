@@ -26,12 +26,12 @@ I've added all problems I attempt, whether or not I completed them.
 
 ## Progress
 
-| Year | Progress                          |
-| ---- | --------------------------------- |
-| 2017 | ![](https://geps.dev/progress/50) |
-| 2019 | ![](https://geps.dev/progress/4)  |
-| 2023 | ![](https://geps.dev/progress/4)  |
-| 2024 | ![](https://geps.dev/progress/12) |
+| Year | Progress                                                                                     |
+| ---- | -------------------------------------------------------------------------------------------- |
+| 2017 | ![](https://geps.dev/progress/50?dangerColor=006600&warningColor=006600&successColor=006600) |
+| 2019 | ![](https://geps.dev/progress/4?dangerColor=006600&warningColor=006600&successColor=006600)  |
+| 2023 | ![](https://geps.dev/progress/4?dangerColor=006600&warningColor=006600&successColor=006600)  |
+| 2024 | ![](https://geps.dev/progress/12?dangerColor=006600&warningColor=006600&successColor=006600) |
 
 ## Features
 
