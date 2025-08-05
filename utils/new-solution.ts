@@ -19,7 +19,7 @@ if (existsSync(newSolution)) {
 // make the folder(s)
 mkdirSync(newSolution, { recursive: true });
 
-const templateDir = join(process.cwd(), 'Template');
+const templateDir = join(process.cwd(), 'utils/Template');
 
 const solutionTemplate = readFileSync(
   join(templateDir, "solution.ts"),

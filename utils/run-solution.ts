@@ -6,6 +6,6 @@ if (!year || !day) {
 }
 
 // path to project root = one level up from utils/
-await import(new URL(`../${year}/Days/${day}/solution.ts`, import.meta.url).href);
+await import(new URL(`../solutions/${year}/${day}/solution.ts`, import.meta.url).href);
 
 export { }
