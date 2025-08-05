@@ -14,3 +14,17 @@ describe('Day 2 - Part 1 - Example Tests', () => {
     expect(result).toEqual(2);
   });
 });
+
+describe('Day 2 - Part 2 - Example Tests', () => {
+  it('4 reports are safe', () => {
+    const input = `7 6 4 2 1
+1 2 7 8 9
+9 7 6 2 1
+1 3 2 4 5
+8 6 4 4 1
+1 3 6 7 9`
+    const result = Day2Part2(input);
+
+    expect(result).toEqual(4);
+  });
+});
