@@ -1,5 +1,5 @@
 ![Advent of Code Logo](https://repository-images.githubusercontent.com/112706767/160be980-3b1a-11eb-9dbe-439a40adfa99)
-<h2 align="center"><i>Advent of Code Solutions</i></h2>
+<h1 align="center"><i>Advent of Code</i></h1>
 
 <p align="center">
   <a>
@@ -20,9 +20,18 @@
 
 These are my [Advent of Code](https://adventofcode.com/) solutions for years 2017 to 2024, written in TypeScript as part of the [Recurse Center](https://recurse.com/)'s Advent of Code group.
 
-In most cases, I optimized for solving the problem quickly, so some of these solutions are... messy. But they (mostly) work! 🎄
+In most cases, I optimized for solving the problem quickly, so some of these solutions are... messy. **But they (mostly) work!** 🎄
 
-I've added all solutions I attempt, whether or not I completed them.
+I've added all problems I attempt, whether or not I completed them.
+
+## Progress
+
+| Year | Progress                          |
+| ---- | --------------------------------- |
+| 2017 | ![](https://geps.dev/progress/50) |
+| 2019 | ![](https://geps.dev/progress/4)  |
+| 2023 | ![](https://geps.dev/progress/4)  |
+| 2024 | ![](https://geps.dev/progress/12) |
 
 ## Features
 
@@ -34,11 +43,12 @@ I've added all solutions I attempt, whether or not I completed them.
 
 ## Installation
 
-```bash
+```zsh
 # Clone the repository
 git clone https://github.com/Nostromos/AdventOfCode
 cd AdventOfCode
-
+```
+```
 # Install dependencies
 npm install
 ```
@@ -47,20 +57,22 @@ npm install
 
 ### Running Solutions
 
-```bash
+```zsh
 # Run a specific day's solution
 npm run solve -- <year> <day>
-
+```
+```
 # Example: Run 2024 Day 1
 npm run solve -- 2024 1
 ```
 
 ### Creating New Solutions
 
-```bash
+```zsh
 # Generate files for a new day
 npm run new-solution -- <year> <day>
-
+```
+```
 # Example: Create template for 2024 Day 25
 npm run new-solution -- 2024 25
 ```
@@ -73,13 +85,15 @@ This creates:
 
 ### Running Tests
 
-```bash
+```zsh
 # Run all tests
 npm run jest
-
+```
+```
 # Run tests for a specific day
 npm run jest 2024/1
-
+```
+```
 # Run tests with coverage
 npm run jest -- --coverage
 ```
@@ -131,10 +145,10 @@ See [docs/UTILITIES.md](utils/UTILITIES.md) for detailed documentation.
 Due to Advent of Code's policy, puzzle inputs and problem descriptions are not included in this repository. You'll need to:
 
 1. Get your puzzle input from [adventofcode.com](https://adventofcode.com)
-2. Save it as `Input.txt` in the appropriate day's directory
-3. Optionally, save the problem description as `Problem.md`
+2. Paste it in the `Input.txt` file in the appropriate day's directory
+3. Optionally, save the problem description in the `Problem.md` file under the same directory.
 
-These files are gitignored to respect the author's wishes.
+These files are `.gitignore`ed to respect the author's wishes and IP. The only way to have fun is solving these yourself with your own input!
 
 ## Development
 
@@ -156,12 +170,12 @@ These files are gitignored to respect the author's wishes.
 - The utility library has evolved over time, so not all solutions use the latest utilities
 - Performance timings are included in solution output
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Acknowledgements
 
-Thanks to [Claire](https://github.com/clairefro) (@clairefro), [Bret](https://github.com/BretHudson) (@BretHudson), and [Florian](https://github.com/rafl) (@rafl) for the meetings, patience, and good nature.
+Thanks to [Claire](https://github.com/clairefro), [Bret](https://github.com/BretHudson), and [Florian](https://github.com/rafl) for the meetings, patience, and good nature.
 
-Big ups to [Eric Wastl](https://github.com/topaz) (@topaz) for creating these. 
+Big ups to [Eric Wastl](https://github.com/topaz) for creating these. 
+
+## License
+
+See the [LICENSE](./LICENSE) file for more information.
