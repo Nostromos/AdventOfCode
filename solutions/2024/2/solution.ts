@@ -1,6 +1,6 @@
 import { loadInput } from "@/utils";
 
-const PATH = "2024/Days/2/Input.txt"; // Relative to project root
+const PATH = "2024/2/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);
 
 // -----------------------------------------
@@ -122,7 +122,7 @@ export function Day2Part2(rawInput: string) {
 
   return safeNum;
 }
- 
+
 const start = performance.now()
 console.log(Day2Part1(raw))
 const end = performance.now()

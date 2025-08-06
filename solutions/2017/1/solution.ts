@@ -1,6 +1,6 @@
 import { loadInput } from "@/utils";
 
-const PATH = "2017/Days/1/Input.txt";
+const PATH = "solutions/2017/1/Input.txt";
 const input = loadInput(PATH);
 
 /**
