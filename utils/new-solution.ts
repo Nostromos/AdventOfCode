@@ -9,10 +9,10 @@ if (!year || !day) {
   process.exit(1);
 }
 
-const newSolution = join(process.cwd(), year, 'Days', day); // path to new solution
+const newSolution = join(process.cwd(), 'solutions', year, day); // path to new solution
 
 // claude told me to do error checking so whatever
-if (existsSync(newSolution)) { 
+if (existsSync(newSolution)) {
   console.error(`${newSolution} already exists!`);
 }
 

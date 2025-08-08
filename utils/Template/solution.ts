@@ -1,6 +1,6 @@
 import { loadInput } from "@/utils";
 
-const PATH = "YEAR/Days/X/Input.txt"; // Relative to project root
+const PATH = "solutions/YEAR/X/Input.txt"; // Relative to project root
 const raw = loadInput(PATH);
 
 // -----------------------------------------
