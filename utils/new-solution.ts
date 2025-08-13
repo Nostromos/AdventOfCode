@@ -27,7 +27,7 @@ const solutionTemplate = readFileSync(
 );
 
 const solutionContent = solutionTemplate
-  .replace('YEAR/Days/X', `${year}/Days/${day}`)
+  .replace('solutions/YEAR/X', `solutions/${year}/${day}`)
   .replace(/DayXPart1/g, `Day${day}Part1`)
   .replace(/DayXPart2/g, `Day${day}Part2`)
   .replace(/X/g, day);
