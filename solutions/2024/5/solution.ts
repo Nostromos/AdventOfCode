@@ -98,9 +98,9 @@ function correctUpdate(rules: Map<number, number[]>, update: number[]): number[]
   const correctedUpdate = new Array(update);
 
   for (let num of update) {
-    let 
+    // finish
   }
-  return correctedUpdate;
+  return [0];
 }
 
 export function Day5Part1(rawInput: string): number {

@@ -1,6 +1,6 @@
 import { loadInput } from "@/utils";
 
-const PATH = "2017/Days/11/Input.txt"; // Relative to project root
+const PATH = "solutions/2017/11/Input.txt"; // Relative to project root
 const input = loadInput(PATH).split(",")
 
 // -----------------------------------------
