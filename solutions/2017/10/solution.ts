@@ -20,11 +20,10 @@ export function Day10Part1(input: string, list?: number) {
   }
 
   for (let i = 0; i < lengths.length; i++) {
-    // reverse the order
     let length = Number(lengths[i])
     let swaps = Number(lengths[i])
     let start = cur
-    let end = (start + length - 1) % rope.length;
+    let end = (start + length - 1) % rope.length; // 
     while (swaps > 1) {
       [rope[start], rope[end]] = [rope[end], rope[start]]
       swaps -= 2
@@ -52,7 +51,7 @@ export function Day10Part2(lengths: number[], rounds: number = 64, list?: number
 
   while (rounds > 0) {
     for (let i = 0; i < lengths.length; i++) {
-      // reverse the order
+      // reverse
       let length = Number(lengths[i])
       let swaps = Number(lengths[i])
       let start = cur
@@ -63,16 +62,14 @@ export function Day10Part2(lengths: number[], rounds: number = 64, list?: number
         start = (start + 1) % rope.length
         end = (end - 1 + rope.length) % rope.length
       }
-      // move current forward by length + skip
+      // move cur ahead by length + skip
       cur = (cur + length + skip) % rope.length;
-      // increment skip
       skip++;
     }
     rounds--;
   }
 
   let denseHash = bitwiseXorReduce(rope);
-  console.log("Dense Hash:", denseHash);
   let hexHash = denseHash.map((val) => {
     return val.toString(16).padStart(2, '0')
   }).join("")
